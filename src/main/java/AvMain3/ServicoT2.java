@@ -1,6 +1,5 @@
 package AvMain3;
 
-import java.util.List;
 import de.tudresden.sumo.cmd.Route;
 import de.tudresden.sumo.cmd.Vehicle;
 import de.tudresden.sumo.objects.SumoStringList;
@@ -9,12 +8,12 @@ import it.polito.appeal.traci.SumoTraciConnection;
 public class ServicoT2 extends Thread{
 	private SumoTraciConnection sumo;
 	private Car carro;
-	private List<Rota> rotas;
+	private Rota rota;
 
-    public ServicoT2 (SumoTraciConnection sumo, Car carro, List<Rota> rotas){
+    public ServicoT2 (SumoTraciConnection sumo, Car carro,Rota rota){
         this.sumo = sumo;
         this.carro = carro;
-		this.rotas=rotas;
+		this.rota=rota;
     }
 
 	@Override
@@ -29,7 +28,7 @@ public class ServicoT2 extends Thread{
 	public void executaRota(Car carro) {
         try {
             //Definindo variáveis úteis
-            Rota rota = this.obterProximaRota();
+            Rota rota = this.rota;
             String idRota = rota.getId();
             String vehicleId = this.carro.getId();
            //System.out.println(this.carro.getId() + " percorrendo a rota " + idRota);
@@ -59,7 +58,6 @@ public class ServicoT2 extends Thread{
                                                 this.carro.getNumeroDePessoas())		//personNumber
                         );
         
-            while(!rotas.isEmpty()){
                 while(on){
                 if(!rotaConcluida(rota)){
                     if(!carro.getPrecisaAbastecer()){
@@ -70,6 +68,7 @@ public class ServicoT2 extends Thread{
                             //System.out.println("Ultima edge "+getUltimaEdge(rota));
                             //System.out.println("Edge do "+this.carro.getId()+" "+(String) this.sumo.do_job_get(Vehicle.getRoadID(this.carro.getId())));
                         }catch(Exception e){
+                            e.printStackTrace();
                         }
                         }
                 }else{
@@ -83,6 +82,7 @@ public class ServicoT2 extends Thread{
                 //System.out.println("Ultima edge "+getUltimaEdge(rota));
                 //System.out.println("Edge depois do "+carro.getId()+" "+(String) this.sumo.do_job_get(Vehicle.getRoadID(carro.getId())));
             }
+            /*
             System.out.println(this.carro.getId()+" Terminou a rota " + rota.getId());
             Rota novaR = obterProximaRota();
             SumoStringList proximosEdges = obterEdges(this.carro, novaR);
@@ -90,8 +90,8 @@ public class ServicoT2 extends Thread{
             sumo.do_job_set(Vehicle.setRoute(vehicleId, proximosEdges));
             on = true;  
             System.out.println(this.carro.getId() + " percorrendo a rota " + novaR.getId());
-
-        }
+ */
+        
         }catch (Exception e) {
             e.printStackTrace();
         }
@@ -113,12 +113,12 @@ public class ServicoT2 extends Thread{
         String[] ultimaEdge = edges[0].split(" ");
         return ultimaEdge[ultimaEdge.length-1];
     }
-
+/*
     public Rota obterProximaRota() {
         Rota proximaRota;
         proximaRota=rotas.remove(0);
         return proximaRota;
-    }
+    } */
 	
 	public boolean rotaConcluida(Rota rota) {
 		try {

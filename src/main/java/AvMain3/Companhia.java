@@ -86,7 +86,7 @@ public class Companhia extends Thread {
     }
 
     public void definirSumo(){
-        String sumo_bin = "sumo-gui"; //Caso quiser abrir a tela do simulador trocar por "sumo-gui"
+        String sumo_bin = "sumo"; //Caso quiser abrir a tela do simulador trocar por "sumo-gui"
 		String config_file = "map/map.sumo.cfg";
 		
 		// Sumo connection
@@ -102,12 +102,21 @@ public class Companhia extends Thread {
             e.printStackTrace();
         }
     }
- 
+
+    public void criarDriversECarros2(){
+        carro = new Car(true,"Carro Principal", sumo,
+        1000,3,4,2);
+        carros.add(carro);
+        driver = new Driver(carro, rotasAExecutar.get(0),
+         "Motorista Principal", this,54321,"localhost");
+        drivers.add(driver);
+    }
+    /*
     public void criarDriversECarros(){
         
         //Criar 100 carros e 100 Motoristas e distribuir as rotas a serem executadas por cada motorista
         int num = 0;
-        for(int i=1;i<=10;i++){
+        for(int i=1;i<=100;i++){
             List<Rota> aux = new ArrayList<>();
             carro = new Car(true,"Carro "+i,sumo,500,3,4,2);
             carros.add(carro);
@@ -119,7 +128,7 @@ public class Companhia extends Thread {
             drivers.add(driver);
             aux = null;
         }
-    }
+    } */
 
     public synchronized void executarProximaRotaC(){
         Rota r = new Rota(rotasAExecutar.get(0).getId(),rotasAExecutar.get(0).getRota());

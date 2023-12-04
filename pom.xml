@@ -46,6 +46,13 @@
       <version>2.0.7</version>
     </dependency>
 
+    <dependency>
+	   <groupId>junit</groupId>
+	    <artifactId>junit</artifactId>
+	    <version>4.12</version>
+	    <scope>test</scope>
+    </dependency>
+
 		<dependency>
 			<groupId>xerces</groupId>
 			<artifactId>xercesImpl</artifactId>
@@ -59,12 +66,6 @@
 		</dependency>
 
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>junit</version>
-    </dependency>
-    
-    <dependency>
       <groupId>libsumo-1.18.0</groupId>
       <artifactId>libsumo-1.18.0</artifactId>
       <version>libsumo-1.18.0</version>
@@ -74,12 +75,6 @@
       <groupId>libsumo-1.18.0-sources</groupId>
       <artifactId>libsumo-1.18.0-sources</artifactId>
       <version>libsumo-1.18.0-sources</version>
-    </dependency>
-
-    <dependency>
-      <groupId>libtraci-1.18.0</groupId>
-      <artifactId>libtraci-1.18.0</artifactId>
-      <version>libtraci-1.18.0</version>
     </dependency>
 
     <dependency>
@@ -111,6 +106,31 @@
         <artifactId>jython-slim</artifactId>
         <version>2.7.3</version>
     </dependency>
+
+    <dependency>
+        <groupId>org.ejml</groupId>
+        <artifactId>ejml-core</artifactId>
+        <version>0.39</version>
+      </dependency>
+
+      <dependency>
+      <groupId>org.ejml</groupId>
+      <artifactId>ejml-simple</artifactId>
+      <version>0.39</version>
+      </dependency>
+
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>5.2.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.22</version>
+            <scope>provided</scope>      
+        </dependency>
 
   </dependencies>
 

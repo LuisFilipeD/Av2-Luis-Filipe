@@ -18,9 +18,14 @@ public class DadosConducao {
 	private int numeroDePessoas;		// the total number of persons which are riding in this vehicle
 	private double co2Emission; 		// in mg/s for the last time step
 	private double HCEmission; 			// in mg/s for the last time step
+    //Av2
+    private double distanciaP;
+    private double[] coord;
+
+    
 
     public DadosConducao(String idCar, long timeStamp, double x_Position, double y_Position,String roadIDSUMO, String routeIDSUMO, double speed, double odometer, double fuelConsumption,
-    double averageFuelConsumption, double fuelPrice, double co2Emission, double HCEmission, int capacidadeDePessoas, int numeroDePessoas){
+    double averageFuelConsumption, double fuelPrice, double co2Emission, double HCEmission, int capacidadeDePessoas, int numeroDePessoas, double distanciaP, double[] coord){
         this.idCar = idCar;
 		this.timeStamp = timeStamp;
 		this.x_Position = x_Position;
@@ -36,7 +41,13 @@ public class DadosConducao {
 		this.HCEmission = HCEmission;
 		this.capacidadeDePessoas = capacidadeDePessoas;
 		this.numeroDePessoas = numeroDePessoas;
+        //Av2
+        this.distanciaP = distanciaP;
+        this.coord=coord;
+    }
 
+    public double[] getCoord(){
+        return coord;
     }
 
     public String getIdCar() {
@@ -100,5 +111,9 @@ public class DadosConducao {
 
     public double getHCEmission() {
         return HCEmission;
+    }
+    //Av2 
+    public double getDistanciaP() {
+        return distanciaP;
     }
 }

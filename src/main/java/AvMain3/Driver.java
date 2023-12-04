@@ -26,18 +26,20 @@ public class Driver extends Thread{
     private int aux;
 
 
-    public Driver(Car carro, List<Rota> rotasAExecutar,String idDriver,Companhia eltman,int porta, String host){
+    public Driver(Car carro, Rota rotaEmExecução,String idDriver,Companhia eltman,int porta, String host){
         this.porta = porta;
         this.host = host;
         this.idDriver = idDriver;
-        this.rotasAExecutar = rotasAExecutar;
+        //this.rotasAExecutar = rotasAExecutar;
+        this.rotaEmExecução = rotaEmExecução;
         this.carro=carro;
         this.eltman=eltman;
-        this.conta = new ContaCorrente(idDriver,1000);
+        this.conta = new ContaCorrente(idDriver,10000);
         BancoSv.adicionarConta(conta);
         conta.start();
         this.aux =0;
         //System.out.println(idDriver+" Conta adicionada ao Banco");
+        System.out.println("ID da Rota em execução: "+rotaEmExecução.getId());
     }
 
     @Override
@@ -59,7 +61,7 @@ public class Driver extends Thread{
                     // Combustivel que falta para completar o tanque
                     double v = 10-carro.getFuelTank();
                     realizarPagamento(socket, v*carro.getPrecoCombustivel());
-                    //System.out.println(carro.getId()+" Abasteceu R$"+v*carro.getPrecoCombustivel());
+                   // System.out.println(carro.getId()+" Abasteceu "+v+"Litros - Por R$"+carro.getPrecoCombustivel());
                     aux =1;
                 }
                 if(carro.getJaAbasteceu()){
@@ -91,16 +93,16 @@ public class Driver extends Thread{
             p.start();
     }
     public void iniciarServico(){
-        this.executarProximaRotaD();
-        st = new ServicoT2(carro.getSumo(), carro, rotasAExecutar);
+        //this.executarProximaRotaD();
+        st = new ServicoT2(carro.getSumo(), carro, rotaEmExecução);
         st.start();
     }
-
+/*
     public synchronized void executarProximaRotaD(){
-        this.rotaEmExecução = rotasAExecutar.get(0);
+        this.rotaEmExecução = rotaEmExecução;
         this.rotasAExecutar.remove(0);
         eltman.executarProximaRotaC();
-    }
+    } */
 
     public synchronized void finalizarRotaD(){
         this.rotasExecutadas.add(rotaEmExecução);
@@ -124,4 +126,3 @@ public class Driver extends Thread{
         return rotaEmExecução;
     }
 }
-
